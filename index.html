@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word and Character Counter</title>
+    <!-- Linking CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Body Container -->
+    <div class="container">
+        <h2>Word and Character Counter</h2>
+        <textarea id="text" placeholder="Please write something....." spellcheck="true" autofocus></textarea>
+        <div class="counter">
+            <div class="character">
+                <div class="charBox"></div>
+                <label>Total Characteters: <span id="charCounting">0</span></label>
+            </div>
+            <div class="word">
+                <div class="wordBox"></div>
+                <label>Total Words: <span id="wordCounting">0</span></label>
+            </div>
+            <div class="line">
+                <div class="lineBox"></div>
+                <label>Total Lines: <span id="lineCounting">0</span></label>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        function wordCount(val) {
+            var wom = val.match(/\S+/g);
+            return {
+                charactersNoSpaces: val.replace(/\s+/g, '').length,
+                characters: val.length,
+                words: wom ? wom.length : 0,
+                lines: val.split(/\r*\n/).length
+            };
+        }
+
+
+        var textarea = document.getElementById('text');
+        var wordCounting = document.getElementById('wordCounting');
+        var charCounting = document.getElementById('charCounting');
+        var lineCounting = document.getElementById('lineCounting');
+
+        textarea.addEventListener('input', function() {
+            var wc = wordCount(this.value);
+            wordCounting.innerText = wc.words;
+            charCounting.innerText = wc.charactersNoSpaces;
+            // result.innerHTML = (`
+            //     <br>Characters (no spaces):  ${wc.charactersNoSpaces}
+            //     <br>Characters (and spaces): ${wc.characters}
+            //     <br>Words: ${wc.words}
+            //     <br>Lines: ${wc.lines}
+            // `);
+        });
+    </script>
+    
+</body>
+</html>
